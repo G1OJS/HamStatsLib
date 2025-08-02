@@ -1,10 +1,10 @@
 var refresh_mSeconds = 5000;
 var watchedMode = "FT8";
 
-import * as UI from './ui.js';
-import * as ENG from './eng.js';
-import * as MQTT from './mqtt.js';
-import * as STORAGE from './storage.js';
+import * as UI from '../../../src/app/ui.js';
+import * as ENG from '../../../src/live-data/conns-data.js';
+import * as MQTT from '../../../src/live-data/mqtt.js';
+import * as STORAGE from '../../../src/app/store-cfg.js';
 
 STORAGE.loadConfig();
 setInterval(UI.updateClock, 1000);
