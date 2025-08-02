@@ -1,7 +1,8 @@
 var mqttClient = null;
 
-import {squaresArr} from './storage.js';
-import {addSpotToConnectivityMap} from './eng.js';
+import {squaresArr} from '../app/store-cfg.js';
+import {addSpotToConnectivityMap} from './conns-data.js';
+import mqtt from 'https://unpkg.com/mqtt/dist/mqtt.esm.js';
 
 export function connectToFeed() {
     //pskr/filter/v2/{band}/{mode}/{sendercall}/{receivercall}/{senderlocator}/{receiverlocator}/{sendercountry}/{receivercountry}

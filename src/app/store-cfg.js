@@ -6,10 +6,10 @@ export var squaresList = ""; // the human-firendly list of squares to watch
 export var purgeMinutes;
 export var myCall;
 
-import {parseSquares} from './geo.js';
-import {writeStatsForAllBands} from './ui.js';
-import {purgeConnections} from './eng.js';
-import {connectToFeed} from './mqtt.js';
+import {parseSquares} from '../analysis/geo.js';
+import {writeStatsForAllBands} from '../app/ui.js';
+import {purgeConnections} from '../live-data/conns-data.js';
+import {connectToFeed} from '../live-data/mqtt.js';
 
 export function updateMyCall(event) {
     myCall = document.getElementById('myCallInput').value;

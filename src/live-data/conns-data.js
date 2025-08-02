@@ -1,8 +1,8 @@
 
 export var connectivity_Band_Mode_HomeCall = {};
 
-import * as GEO from './geo.js';
-import {purgeMinutes} from './storage.js';
+import * as GEO from '../analysis/geo.js';
+import {purgeMinutes} from '../app/store-cfg.js';
 
 
 export function addSpotToConnectivityMap(spot){

@@ -3,8 +3,8 @@ var HTML = "";
 var activeModes = new Set();
 var watchedMode="FT8";
 
-import * as ENG from './eng.js';
-import * as STORAGE from './storage.js';
+import * as ENG from '../live-data/conns-data.js';
+import * as STORAGE from '../app/store-cfg.js';
 console.log('STORAGE.updateSquaresList:', STORAGE.updateSquaresList);
 
 
