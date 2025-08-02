@@ -3,42 +3,12 @@ var HTML = "";
 var activeModes = new Set();
 var watchedMode="FT8";
 
-import * as ENG from '../live-data/conns-data.js';
-import * as STORAGE from '../app/store-cfg.js';
-console.log('STORAGE.updateSquaresList:', STORAGE.updateSquaresList);
+import * as CONNSDATA from '../../../src/live-data/conns-data.js';
+import * as STORAGE from '../../../src/app/store-cfg.js';
 
-
-export function updateClock() {
-    const t = new Date;
-    const utc = ("0" + t.getUTCHours()).slice(-2) + ":" + ("0" + t.getUTCMinutes()).slice(-2) + ":" + ("0" + t.getUTCSeconds()).slice(-2);
-    const runningmins = Math.trunc(((t - tStart) / 1000) / 60);
-    document.getElementById("clock").innerHTML = utc + " UTC";
-    document.getElementById("runningMins").innerHTML = runningmins;
-	document.getElementById("connectionsIn").innerHTML = ENG.countAllTimestamps();
-}
-
-export function writeModeButtons() {
-    const el = document.getElementById("modeSelectBox");
-    el.innerHTML = "<legend>Mode</legend>";
-    activeModes.forEach((md) => {
-        const modeBtn = document.createElement("button");
-        modeBtn.type = "button";
-        modeBtn.className = "modeSelectBtn";
-        modeBtn.id = md;
-        modeBtn.textContent = md;
-        modeBtn.addEventListener('click', () => setMode(md));
-        el.appendChild(modeBtn);
-
-        if (md === watchedMode) {
-            modeBtn.classList.add('active');
-        }
-    });
-}
-
-function setMode(mode) {
-    watchedMode = mode;
-    writeStatsForAllBands();
-	writeModeButtons();
+let ribbon;
+export function setRibbon(r) {
+  ribbon = r;
 }
 
 function wavelength(band) {
@@ -58,16 +28,17 @@ function safePercentage(numerator, denominator) {
 
 export function writeStatsForAllBands() {
 
-    const activeBands = Object.keys(ENG.connectivity_Band_Mode_HomeCall).sort((a, b) => wavelength(b) - wavelength(a));
+    const activeBands = Object.keys(CONNSDATA.connectivity_Band_Mode_HomeCall).sort((a, b) => wavelength(b) - wavelength(a));
+ 	const currentMode = ribbon ? ribbon.getWatchedMode() : "FT8";
  
-    HTML = "<h3>Transmitting " + watchedMode + "</h3><div class='outputContainer transmit'>";
+    HTML = "<h3>Transmitting " + currentMode + "</h3><div class='outputContainer transmit'>";
     writeStatsRowLabels();
-    activeBands.forEach(band => writeStatsForThisBand(band, "Tx"));
+    activeBands.forEach(band => writeStatsForThisBand(band, currentMode, "Tx"));
     HTML += "</div>";
 	
-    HTML += "<h3>Receiving " + watchedMode + "</h3><div class='outputContainer receive'>";
+    HTML += "<h3>Receiving " + currentMode + "</h3><div class='outputContainer receive'>";
     writeStatsRowLabels();
-    activeBands.forEach(band => writeStatsForThisBand(band, "Rx"));
+    activeBands.forEach(band => writeStatsForThisBand(band, currentMode, "Rx"));
     HTML += "</div>";
 	
     document.getElementById("mainContent").innerHTML = HTML;
@@ -88,23 +59,24 @@ function writeStatsRowLabels() {
      + "</div>";
 }
 
-function writeStatsForThisBand(band, RxTx) {
+export function writeStatsForThisBand(band, mode, RxTx) {
 //	console.log("Writing stats for " + band + RxTx);
-    const bandData = ENG.connectivity_Band_Mode_HomeCall[band];
+    const bandData = CONNSDATA.connectivity_Band_Mode_HomeCall[band];
     if (!bandData) return;
 
     // Update activeModes early for all modes found on this band
     for (const md in bandData) {
         activeModes.add(md);
     }
+	ribbon.registerActiveModes(activeModes);
 
     // Access the relevant direction of the watched mode
-    const bandModeData = bandData[watchedMode]?.[RxTx];
+    const bandModeData = bandData[mode]?.[RxTx];
 
     // Skip only if both directions are missing or empty
     if (!bandModeData || Object.keys(bandModeData).length === 0) {
         const otherDir = (RxTx === "Tx") ? "Rx" : "Tx";
-        const otherData = bandData[watchedMode]?.[otherDir];
+        const otherData = bandData[mode]?.[otherDir];
         if (!otherData || Object.keys(otherData).length === 0) return;
     }
 
@@ -146,33 +118,4 @@ function writeStatsForThisBand(band, RxTx) {
      + "</div></div>";
 }
 
-
-document.addEventListener('DOMContentLoaded', () => {
-	
-  const myCallInput = document.getElementById('myCallInput');
-  if (myCallInput) {
-    myCallInput.addEventListener('change', STORAGE.updateMyCall);
-    console.log('Listener attached to myCallInput');
-  } else {
-    console.warn('myCallInput element not found');
-  }
-
-  const homeSquaresInput = document.getElementById('homeSquaresInput');
-  if (homeSquaresInput) {
-	const input = document.getElementById('homeSquaresInput');
-    console.log('Input element:', input);
-    input.addEventListener('change', STORAGE.updateSquaresList);
-    console.log('Listener attached to homeSquaresInput');
-  } else {
-    console.warn('homeSquaresInput element not found');
-  }
-
-  const purgeMinutesInput = document.getElementById('purgeMinutesInput');
-  if (purgeMinutesInput) {
-    purgeMinutesInput.addEventListener('change', STORAGE.updatePurgeMins);
-    console.log('Listener attached to purgeMinutesInput');
-  } else {
-    console.warn('purgeMinutesInput element not found');
-  }
-});
 
