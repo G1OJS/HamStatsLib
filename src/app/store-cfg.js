@@ -7,7 +7,6 @@ export var purgeMinutes;
 export var myCall;
 
 import {parseSquares} from '../analysis/geo.js';
-import {writeStatsForAllBands} from '../app/ui.js';
 import {purgeConnections} from '../live-data/conns-data.js';
 import {connectToFeed} from '../live-data/mqtt.js';
 
@@ -17,7 +16,6 @@ export function updateMyCall(event) {
 	document.getElementById('myCallInput').value = myCall;
     console.log("my Call updated to " + myCall);
     saveConfig();
-    writeStatsForAllBands();
 }
 
 export function updateSquaresList(event) {
@@ -32,7 +30,6 @@ export function updateSquaresList(event) {
         input.setCustomValidity("");
         saveConfig();
         connectToFeed();
-        writeStatsForAllBands();
     }
 	input.reportValidity();
 
@@ -43,7 +40,6 @@ export function updatePurgeMins(event) {
     console.log("Purge mins updated to " + purgeMinutes);
     saveConfig();
     purgeConnections();
-    writeStatsForAllBands();
 }
 
 export function saveConfig() {
