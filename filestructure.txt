@@ -1,0 +1,19 @@
+HamStatsLib
+|_src
+|  |_analysis	
+|  |       |_geo.js	Maidenhead squares, distance/bearing, 'square is in home'
+|  |
+|  |_app
+|  |   |
+|  |   |_main.js 	Currently the very short main for Station Benchmark
+|  |   |_store-cfg.js   References both the DOM and localStorage to update app options 
+|  |   |_ui.js		Create buttons, respond to presses, update screen outputs etc
+|  |   |
+|  |
+|  |_live-data
+|            |_conns-data.js processes the mqtt feed and maintains a live connectivity data structure
+|            |_mgtt.js		connect to feed, subscribe, parse messages to dict
+|
+|_styles
+|      |style.css
+|
