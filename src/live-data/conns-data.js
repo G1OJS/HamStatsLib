@@ -19,14 +19,12 @@ export function addSpotToConnectivityMap(spot){
     const band = String(spot.b);
     const mode = String(spot.md);
     const t = parseInt(spot.t);
+    // create band entry if it doesn't exist
     if (!connectivity_Band_Mode_HomeCall[band])
         connectivity_Band_Mode_HomeCall[band] = {}
-    // create band entry if it doesn't exist
+	// create mode entry if it doesn't exist
     if (!connectivity_Band_Mode_HomeCall[band][mode])
-        connectivity_Band_Mode_HomeCall[band][mode] = {
-            Tx: {},
-            Rx: {}
-        }; // create mode entry if it doesn't exist
+        connectivity_Band_Mode_HomeCall[band][mode] = {Tx: {}, Rx: {} }; 
     if (sh) {
         const h = spot.sc,
         o = spot.rc;

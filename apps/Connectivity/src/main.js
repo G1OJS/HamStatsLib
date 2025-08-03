@@ -9,8 +9,8 @@ import * as STORAGE from '../../../src/app/store-cfg.js';
 
 
 const ribbon = new Ribbon({
-  onModeChange: UI.writeStatsForAllBands,
-  onConfigChange: UI.writeStatsForAllBands
+  onModeChange: UI.showBandConnectivity,
+  onConfigChange: UI.showBandConnectivity
 });
 UI.setRibbon(ribbon);
 
@@ -18,7 +18,7 @@ UI.setRibbon(ribbon);
 STORAGE.loadConfig();
 setInterval(() => ribbon.updateClock(), 1000);
 setInterval(() => ribbon.writeModeButtons(), refresh_mSeconds);
-setInterval(UI.writeStatsForAllBands, refresh_mSeconds);
+setInterval(UI.showBandConnectivity, refresh_mSeconds);
 setInterval(CONNSDATA.purgeConnections, 30000);
 MQTT.connectToFeed();
 

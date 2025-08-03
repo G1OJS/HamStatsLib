@@ -134,6 +134,11 @@ input {border:none;}
 
 #mainContent { display: grid; grid-template-columns:  1fr; grid-template-rows: 1fr; }
 
+.vt {
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+}
+
 .outputContainer {display: flex; flex-wrap: wrap; gap: var(--spacing-xs); max-width: 100%;  width:fit-content; 
                   padding: var(--spacing-xs); margin-bottom:var(--spacing); }
 .outputContainer.transmit {background-color: var(--background-color-transmit);}
