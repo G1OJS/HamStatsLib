@@ -1,7 +1,7 @@
 # HamStatsLib
 Library of components to support various views of online ham radio statistics.
 
-Currently centred around spots from pskreporter where at least one of the Tx/Rx calls is 'nearby', but I might expand it to include data from other sources.
+Currently centred around spots from pskreporter where at least one of the Tx/Rx calls is 'nearby', but I might expand it to include data from other sources. As an example, see [Station Benchmark HamStatsLib version](https://g1ojs.github.io/HamStatsLib/apps/StationBenchmark/Station_Benchmark.html).
 
 ## Concept
 The current standard components are:
