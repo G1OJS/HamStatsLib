@@ -1,5 +1,7 @@
 # HamStatsLib
-Library of components to support various views of online ham radio statistics
+Library of components to support various views of online ham radio statistics.
+
+Currently centred around spots from pskreporter where at least one of the Tx/Rx calls is 'nearby', but I might expand it to include data from other sources. As an example, see [Station Benchmark HamStatsLib version](https://g1ojs.github.io/HamStatsLib/apps/StationBenchmark/Station_Benchmark.html).
 
 ## Concept
 The current standard components are:
@@ -11,7 +13,8 @@ The current standard components are:
 
 The diagram below shows the concept of how these components can be used to support different apps focussing on different aspects of the data
 
-<img width="1202" height="673" alt="Capture" src="https://github.com/user-attachments/assets/7d1cb5b5-ba65-4bfe-876b-08c43801fd0c" />
+<img width="1146" height="680" alt="Capture" src="https://github.com/user-attachments/assets/9cc91002-df33-4e1f-b7f3-72aa233499da" />
+
 
 ## Current Apps
 
