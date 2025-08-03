@@ -11,7 +11,8 @@ The current standard components are:
 
 The diagram below shows the concept of how these components can be used to support different apps focussing on different aspects of the data
 
-<img width="1202" height="673" alt="Capture" src="https://github.com/user-attachments/assets/7d1cb5b5-ba65-4bfe-876b-08c43801fd0c" />
+<img width="1146" height="680" alt="Capture" src="https://github.com/user-attachments/assets/9cc91002-df33-4e1f-b7f3-72aa233499da" />
+
 
 ## Current Apps
 
