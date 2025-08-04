@@ -21,8 +21,9 @@ export default class Ribbon {
 		this.onConfigChange = onConfigChange || (() => {});
 		this.tStart = Date.now();
 		this.watchedMode = "FT8";
-		this.activeModes = new Set();
+		this.activeModes = new Set(this.watchedMode);
 		this.attachInputHandlers();
+		setInterval(() => this.updateClock(), 1000);
 	}
 
 	getWatchedMode() {
@@ -64,6 +65,7 @@ export default class Ribbon {
 
 	registerActiveModes(modeList) {
 		this.activeModes = new Set(modeList);
+		this.writeModeButtons();
 		//console.log("ribbon: register active modes",this.activeModes);
 	}
 
