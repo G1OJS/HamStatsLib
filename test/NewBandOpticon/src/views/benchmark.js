@@ -2,7 +2,6 @@
 import * as CONNSDATA from '/src/live-data/conns-data.js';
 import * as STORAGE from '/src/app/store-cfg.js';
 
-var tStart = Date.now(); // software start time
 var activeModes = new Set(); // updated to be relevant to the current view and then passed back to ribbon
 var currentMode = null;
 var DOMcontainer = null;
@@ -22,10 +21,10 @@ export function init(container, opts = {}) {
 
 export function refresh(){
   currentMode = getMode();
-  let HTML = '<h2>Station Benchmark</h2><div id="benchmarkBox"></div>';
-  HTML += writeStatsForAllBands();
+  let HTML = '<h2>Station Benchmark</h2>';
+  HTML += html_forStatsForAllBands();
   DOMcontainer.innerHTML = HTML;
-  registerActiveModes(activeModes);	// updated in writeStatsForAllBands and now passed back to ribbon
+  registerActiveModes(activeModes);	// updated in html_forStatsForAllBands and now passed back to ribbon
 }
 
 function wavelength(band) {
@@ -43,20 +42,20 @@ function safePercentage(numerator, denominator) {
     return Math.round((numerator / denominator) * 100) + "%";
 }
 
-export function writeStatsForAllBands() {
+function html_forStatsForAllBands() {
 
 	const activeBands = Object.keys(CONNSDATA.connectivity_Band_Mode_HomeCall).sort((a, b) => wavelength(b) - wavelength(a));
 	
 	var HTML = "";
  
     HTML = "<h3>Transmitting " + currentMode + "</h3><div class='outputContainer transmit'>";
-    HTML += writeStatsRowLabels();
-    activeBands.forEach(band => HTML += writeStatsForThisBand(band, currentMode, "Tx"));
+    HTML += html_forStatsRowLabels();
+    activeBands.forEach(band => HTML += html_forStatsForThisBand(band, currentMode, "Tx"));
     HTML += "</div>";
 	
     HTML += "<h3>Receiving " + currentMode + "</h3><div class='outputContainer receive'>";
-    HTML += writeStatsRowLabels();
-    activeBands.forEach(band => HTML += writeStatsForThisBand(band, currentMode, "Rx"));
+    HTML += html_forStatsRowLabels();
+    activeBands.forEach(band => HTML += html_forStatsForThisBand(band, currentMode, "Rx"));
     HTML += "</div>";
 	
     document.getElementById("mainContent").innerHTML = HTML;
@@ -69,7 +68,7 @@ export function writeStatsForAllBands() {
 	return HTML;
 }
 
-function writeStatsRowLabels() {
+function html_forStatsRowLabels() {
     return "<div class = 'outputColumn'>"
      + "<div class = 'firstColumn topRow' title = 'Band'>Band</div>"
      + "<div class = 'firstColumn' title = 'Number of callsigns active in home squares'>Home calls</div>"
@@ -79,7 +78,7 @@ function writeStatsRowLabels() {
      + "</div>";
 }
 
-export function writeStatsForThisBand(band, mode, RxTx) {
+function html_forStatsForThisBand(band, mode, RxTx) {
 //	console.log("Writing stats for " + band + RxTx);
     const bandData = CONNSDATA.connectivity_Band_Mode_HomeCall[band];
     if (!bandData) return "";
@@ -133,7 +132,7 @@ export function writeStatsForThisBand(band, mode, RxTx) {
     }
 
     HTML += "<div><div class='outputColumn'>"
-     + "<div class='topRow'>" + band + "</div>"
+     + "<div class='topRow' data-band='"+band+"'>" + band + "</div>"
      + "<div>" + nActive + "</div>"
      + "<div>" + otherEndCallsAggregate.size + "</div>"
      + "<div title='" + winner + "'>" + nMax + "</div>"

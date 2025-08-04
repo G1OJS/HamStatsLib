@@ -1,6 +1,4 @@
 var tStart = Date.now(); // software start time
-var activeModes = new Set();
-var watchedMode="FT8";
 
 import * as STORAGE from '../app/store-cfg.js';
 import * as UI from '../../test/StationBenchmark/src/ui.js';
@@ -29,7 +27,7 @@ export default class Ribbon {
 	getWatchedMode() {
 	  return this.watchedMode;
 	}
-
+	
 	updateClock() {
 		const t = new Date;
 		const utc = ("0" + t.getUTCHours()).slice(-2) + ":" + ("0" + t.getUTCMinutes()).slice(-2) + ":" + ("0" + t.getUTCSeconds()).slice(-2);
