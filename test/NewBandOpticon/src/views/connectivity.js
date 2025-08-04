@@ -35,7 +35,7 @@ export function refresh(){
 	registerActiveModes(activeModes);	// updated in html_forStatsForAllBands and now passed back to ribbon
 
 	mode = getMode();
-	let HTML = '<h2>Connectivity for ' + band + ' ' + mode +'</h2>';
+	let HTML = '<h2>*HOME* Connectivity for ' + band + ' ' + mode +'</h2>';
 	HTML += html_for_ModeConnectivity(mode)
 	DOMcontainer.innerHTML = HTML;
 }
@@ -57,17 +57,17 @@ function html_for_ModeConnectivity(mode){
 	}
 	homeCalls = Array.from(homeCalls)
 
-	let HTML = "<table id='connectivityGrid' border='1' style='border-collapse: collapse;'>";
+	let HTML = "<table id='connectivityTable' class='connectivityTable' >";
 	// Column headers
 	HTML += "<thead><tr><th></th>";
 	for (const colCall of homeCalls) {
-		HTML += `<th class = 'vt'>${colCall}</th>`;
+		HTML += `<th class = 'transmit'>${colCall}</th>`;
 	}
 	HTML += "</tr></thead><tbody>";
 	
 	// Row Headers
 	for (const rowCall of homeCalls) {
-		HTML += `<tr><th class=''>${rowCall}</th>`;
+		HTML += `<tr><th class='receive'>${rowCall}</th>`;
 		// Cells 
 		for (const colCall of homeCalls) {
 			var txt = "";
@@ -77,7 +77,7 @@ function html_for_ModeConnectivity(mode){
 					txt = 'X';
 				}
 			}
-			HTML += "<td>"+txt+"</td>";
+			HTML += "<td class = 'cell'>"+txt+"</td>";
 		}
 		HTML += "</tr>";
 	}

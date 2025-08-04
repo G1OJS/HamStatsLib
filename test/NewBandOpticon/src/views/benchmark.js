@@ -21,7 +21,7 @@ export function init(container, opts = {}) {
 
 export function refresh(){
   currentMode = getMode();
-  let HTML = '<h2>Station Benchmark</h2>';
+  let HTML = '<h2>Bands Overview</h2>';
   HTML += html_forStatsForAllBands();
   DOMcontainer.innerHTML = HTML;
   registerActiveModes(activeModes);	// updated in html_forStatsForAllBands and now passed back to ribbon

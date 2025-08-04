@@ -30,17 +30,17 @@ export function showBandConnectivity(){
 	}
 	homeCalls = Array.from(homeCalls)
 
-	let HTML = "<table id='connectivityGrid' border='1' style='border-collapse: collapse;'>";
+	let HTML = "<table class = 'connectivityTable' id='connectivityTable'>";
 	// Column headers
 	HTML += "<thead><tr><th></th>";
 	for (const colCall of homeCalls) {
-		HTML += `<th class = 'vt'>${colCall}</th>`;
+		HTML += `<th class = 'transmit'>${colCall}</th>`;
 	}
 	HTML += "</tr></thead><tbody>";
 	
 	// Row Headers
 	for (const rowCall of homeCalls) {
-		HTML += `<tr><th class=''>${rowCall}</th>`;
+		HTML += `<tr><th class='receive'>${rowCall}</th>`;
 		// Cells 
 		for (const colCall of homeCalls) {
 			var txt = "";

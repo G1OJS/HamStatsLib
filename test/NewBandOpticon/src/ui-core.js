@@ -2,7 +2,6 @@
 
 import Ribbon from '/src/app/ribbon.js';
 
-
 import * as Benchmark from './views/benchmark.js';
 import * as Connectivity from './views/connectivity.js';
 
@@ -70,6 +69,7 @@ document.getElementById('mainContent').addEventListener('click', (e) => {
     loadView('connectivity', { band: band });
   }
 });
+
 
 // view back button handler
 const backButton = document.getElementById('backButton');
