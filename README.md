@@ -9,4 +9,4 @@
 
 ---
 
-This repository is retained for historical reference only and may be deleted soon.
+This repository may be deleted soon.
