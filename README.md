@@ -1,5 +1,4 @@
-# HamStatsLib
-# Station Benchmark (Archived)
+# HamStatsLib (Archived)
 
 🚧 This project has been **archived** and is no longer maintained here.
 
